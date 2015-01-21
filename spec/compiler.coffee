@@ -368,6 +368,16 @@ describe 'VFL-to-CCSS Compiler', ->
             '#b2[right] + [my-outer-gap] == #parent[right]'
           ]
 
+    parse """
+            @h |-[my-outer-gap]-(#b1)-(#b2)-[my-outer-gap]-| in(#parent) gap([my-gap]); // mixed var gaps with function gap            
+          """
+        ,
+          [
+            '#parent[left] + [my-outer-gap] == #b1[left]'
+            '#b1[right] + [my-gap] == #b2[left]'
+            '#b2[right] + [my-outer-gap] == #parent[right]'
+          ]
+
     expectError '@h |-(#box]-;'
 
   # Points
